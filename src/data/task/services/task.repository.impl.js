@@ -1,11 +1,12 @@
 const Result = require('../../../core/utils/result');
 const { Failure } = require('../../../core/response/failure/failure.response');
 const db = require("../../../core/utils/sequelize");
+const TaskDom = require('../../../domain/task/models/task.dom');
 const Task = db.task;
 
 class TaskRepositoryImpl {
     /**
-     * Sign up of user.
+     * add of task.
      * @param {TaskRequestDom} _param - .
      * @returns {Promise<Result<Boolean, Failure>>}
      */
@@ -24,6 +25,32 @@ class TaskRepositoryImpl {
                 return new Result.Left('Failed to add task');
             }
         } catch (error) {
+            return new Result.Left('error server');
+        }
+    }
+
+    /**
+     * list of task.
+     * @returns {Promise<Result<Array<TaskDom>, Failure>>}
+     */
+    async list() {
+        try {
+            const tasks = await Task.findAll();
+
+            const taskList = tasks.map(task => {
+                const taskDom = new TaskDom(
+                    task.id,
+                    task.title,
+                    task.description,
+                    task.expiration,
+                    task.status
+                );
+                return taskDom;
+            });
+
+            return new Result.Right(taskList);
+        } catch (error) {
+            log(error)
             return new Result.Left('error server');
         }
     }
