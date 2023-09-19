@@ -9,13 +9,13 @@ const TaskAddRequestDom = require('../../../domain/task/models/request/task.add.
 
 const addTask = async(req, res) => {
     try {
-        const { title, description, expiration } = req.body;
+        const { title, description, expiration, status } = req.body;
 
         const taskRepository = new TaskRepositoryImpl();
         const taskAddUseCase = new TaskAddUseCaseDom(taskRepository);
 
 
-        const _param = new TaskAddRequestDom(title, description, expiration, 'PENDIENTE');
+        const _param = new TaskAddRequestDom(title, description, expiration, status);
 
         const result = await taskAddUseCase.execute(_param)
 
