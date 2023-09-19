@@ -9,13 +9,13 @@ const TaskEditRequestDom = require('../../../domain/task/models/request/task.edi
 
 const editTask = async(req, res) => {
     try {
-        const { id, title, description, expiration } = req.body;
+        const { id, title, description, expiration, status } = req.body;
 
         const taskRepository = new TaskRepositoryImpl();
         const taskEditUseCaseDom = new TaskEditUseCaseDom(taskRepository);
 
 
-        const _param = new TaskEditRequestDom(id, title, description, expiration, 'PENDIENTE');
+        const _param = new TaskEditRequestDom(id, title, description, expiration, status);
 
         const result = await taskEditUseCaseDom.execute(_param)
 
