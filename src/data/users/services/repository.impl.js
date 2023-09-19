@@ -74,7 +74,7 @@ class UserRepositoryImpl {
             });
 
 
-            return new Result.Right({ accessToken: 'Bearer ' + accessToken, refreshToken: 'Bearer ' + refreshToken });
+            return new Result.Right({ accessToken: 'Bearer ' + accessToken, refreshToken: 'Bearer ' + refreshToken, isLogin: true });
         } catch (error) {
             return new Result.Left('Server error');
         }
