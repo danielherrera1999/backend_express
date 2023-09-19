@@ -2,6 +2,7 @@ const authJwt = require("../../../core/middleware/jwt.authentication");
 
 const addTaskController = require("../controller/task.add.controller");
 const listTaskController = require("../controller/task.list.controller");
+const editTaskController = require("../controller/task.edit.controller");
 
 module.exports = function(app) {
     app.use(function(req, res, next) {
@@ -15,6 +16,11 @@ module.exports = function(app) {
     app.post(
         "/api/services/task/add", [authJwt.verifyToken],
         addTaskController
+    );
+
+    app.post(
+        "/api/services/task/edit", [authJwt.verifyToken],
+        editTaskController
     );
 
     app.post(

@@ -4,23 +4,23 @@ const router = express.Router();
 
 const ApiResponse = require('../../../core/response/api.response');
 const TaskRepositoryImpl = require('../../../data/task/services/task.repository.impl');
-const TaskAddUseCaseDom = require('../../../domain/task/usecase/commands/task.add.usecase.dom');
-const TaskAddRequestDom = require('../../../domain/task/models/request/task.add.request.dom');
+const TaskEditUseCaseDom = require('../../../domain/task/usecase/commands/task.edit.usecase.dom');
+const TaskEditRequestDom = require('../../../domain/task/models/request/task.edit.request.dom');
 
-const addTask = async(req, res) => {
+const editTask = async(req, res) => {
     try {
-        const { title, description, expiration } = req.body;
+        const { id, title, description, expiration } = req.body;
 
         const taskRepository = new TaskRepositoryImpl();
-        const taskAddUseCase = new TaskAddUseCaseDom(taskRepository);
+        const taskEditUseCaseDom = new TaskEditUseCaseDom(taskRepository);
 
 
-        const _param = new TaskAddRequestDom(title, description, expiration, 'PENDIENTE');
+        const _param = new TaskEditRequestDom(id, title, description, expiration, 'PENDIENTE');
 
-        const result = await taskAddUseCase.execute(_param)
+        const result = await taskEditUseCaseDom.execute(_param)
 
         if (result.value !== undefined) {
-            const response = ApiResponse.success(result.value, 'Successfully add task', 200);
+            const response = ApiResponse.success(result.value, 'Successfully edit task', 200);
             res.status(200).json(response);
         } else {
             const errorMessage = result.error;
@@ -34,4 +34,4 @@ const addTask = async(req, res) => {
     }
 }
 
-module.exports = addTask
+module.exports = editTask

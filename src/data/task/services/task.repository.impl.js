@@ -7,7 +7,7 @@ const Task = db.task;
 class TaskRepositoryImpl {
     /**
      * add of task.
-     * @param {TaskRequestDom} _param - .
+     * @param {TaskAddRequestDom} _param - .
      * @returns {Promise<Result<Boolean, Failure>>}
      */
     async add(_param) {
@@ -51,6 +51,28 @@ class TaskRepositoryImpl {
             return new Result.Right(taskList);
         } catch (error) {
             log(error)
+            return new Result.Left('error server');
+        }
+    }
+
+    /**
+     * add of task.
+     * @param {TaskEditRequestDom} _param - .
+     * @returns {Promise<Result<Boolean, Failure>>}
+     */
+    async edit(_param) {
+        try {
+            const existingTask = await Task.findByPk(_param.id);
+            if (!existingTask) {
+                return new Result.Left('Task not found');
+            }
+            existingTask.title = _param.title;
+            existingTask.description = _param.description;
+            existingTask.expiration = _param.expiration;
+            existingTask.status = _param.status;
+            await existingTask.save();
+            return new Result.Right(true)
+        } catch (error) {
             return new Result.Left('error server');
         }
     }
