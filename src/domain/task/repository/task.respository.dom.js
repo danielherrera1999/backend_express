@@ -6,6 +6,11 @@ class TaskRepositoryDom {
      */
     async add(_param) {}
 
+    /**
+     * Task add.
+     * @returns {Promise<Result<Array<TaskDom>, Failure>>}
+     */
+    async list() {}
 }
 
 

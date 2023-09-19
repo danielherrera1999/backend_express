@@ -6,7 +6,7 @@ const TaskRepositoryDom = require('../../repository/task.respository.dom');
 const taskRepositoryDom = new TaskRepositoryDom();
 
 
-class TaskUseCaseDom {
+class TaskAddUseCaseDom {
     constructor(taskRepositoryDom) {
             this.taskRepositoryDom = taskRepositoryDom;
         }
@@ -31,4 +31,4 @@ class TaskUseCaseDom {
     }
 }
 
-module.exports = TaskUseCaseDom
+module.exports = TaskAddUseCaseDom
