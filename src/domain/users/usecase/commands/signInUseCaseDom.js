@@ -13,7 +13,7 @@ class SignInUseCaseDom {
         /**
          * Sign up of user.
          * @param {AuthRequestDom} _param - .
-         * @returns {Promise<Result<Boolean, Failure>>}
+         * @returns {Promise<Result<Object, Failure>>}
          */
     async execute(_param) {
         try {
@@ -21,7 +21,7 @@ class SignInUseCaseDom {
             const isRegistered = await this.userRepository.signIn(_param);
             // condition of successfull
             if (isRegistered.value !== undefined) {
-                return new Result.Right(true);
+                return new Result.Right(isRegistered.value);
             } else {
                 return new Result.Left(isRegistered.error);
             }

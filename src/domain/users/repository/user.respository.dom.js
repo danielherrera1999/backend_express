@@ -9,7 +9,7 @@ class UserRepositoryDom {
     /**
      * Sign up of user.
      * @param {AuthRequestDom} _param - .
-     * @returns {Promise<Result<Boolean, Failure>>}
+     * @returns {Promise<Result<Object, Failure>>}
      */
     async signIn(_param) {}
 }

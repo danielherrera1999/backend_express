@@ -1,8 +1,10 @@
 const Result = require('../../../core/utils/result');
 const { Failure } = require('../../../core/response/failure/failure.response');
 const db = require("../../../core/utils/sequelize");
+const config = require("../../../core/config/jwt.config");
 const User = db.user;
 const bcrypt = require('bcryptjs');
+var jwt = require("jsonwebtoken");
 
 class UserRepositoryImpl {
     /**
@@ -43,7 +45,7 @@ class UserRepositoryImpl {
     /**
      * Sign up of user.
      * @param {AuthRequestDom} _param - .
-     * @returns {Promise<Result<Boolean, Failure>>}
+     * @returns {Promise<Result<Object, Failure>>}
      */
     async signIn(_param) {
         try {
@@ -61,7 +63,18 @@ class UserRepositoryImpl {
                 return new Result.Left('Incorrect password');
             }
 
-            return new Result.Right(true);
+            const accessToken = jwt.sign({ id: existingUser.id }, config.accessTokenSecret, {
+                algorithm: 'HS256',
+                expiresIn: '24h',
+            });
+
+            const refreshToken = jwt.sign({ id: existingUser.id }, config.refreshTokenSecret, {
+                algorithm: 'HS256',
+                expiresIn: '7d',
+            });
+
+
+            return new Result.Right({ accessToken: 'Bearer ' + accessToken, refreshToken: 'Bearer ' + refreshToken });
         } catch (error) {
             return new Result.Left('Server error');
         }

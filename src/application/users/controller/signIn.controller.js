@@ -6,7 +6,7 @@ const UserRepositoryImpl = require('../../../data/users/services/repository.impl
 const UserRequestDom = require('../../../domain/users/models/request/user.request.dom.js');
 const ApiResponse = require('../../../core/response/api.response');
 
-router.post('/signIn', async(req, res) => {
+const signIn = async(req, res) => {
     try {
         const { username, email, password } = req.body;
 
@@ -31,6 +31,6 @@ router.post('/signIn', async(req, res) => {
         const response = ApiResponse.error(error, 500);
         res.status(500).json(response);
     }
-})
+}
 
-module.exports = router
+module.exports = signIn

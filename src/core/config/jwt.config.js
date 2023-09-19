@@ -1,3 +1,4 @@
 module.exports = {
-    secret: process.env.SECRET
+    accessTokenSecret: process.env.SECRET,
+    refreshTokenSecret: process.env.REFRESH_SECRET,
 }

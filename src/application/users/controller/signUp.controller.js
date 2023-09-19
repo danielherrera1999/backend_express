@@ -7,7 +7,7 @@ const SignUpUseCaseDom = require('../../../domain/users/usecase/commands/SignUpU
 const UserRequestDom = require('../../../domain/users/models/request/user.request.dom.js');
 const ApiResponse = require('../../../core/response/api.response');
 
-router.post('/signUp', async(req, res) => {
+const signUp = async(req, res) => {
     try {
         const { username, email, password } = req.body;
 
@@ -32,6 +32,6 @@ router.post('/signUp', async(req, res) => {
         const response = ApiResponse.error(error, 500);
         res.status(500).json(response);
     }
-})
+}
 
-module.exports = router
+module.exports = signUp

@@ -28,8 +28,11 @@ const db = require("./core/utils/sequelize");
 
 db.sequelize.sync();
 
-app.use('/auth', signUpController);
-app.use('/auth', signInController);
+// app.use('/auth', signUpController);
+// app.use('/auth', signInController);
+
+// routes
+require('./application/users/routes/user.routes')(app);
 
 // Simple router example
 app.get("/server-on", (req, res) => {
