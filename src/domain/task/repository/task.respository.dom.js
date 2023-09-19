@@ -18,6 +18,13 @@ class TaskRepositoryDom {
      * @returns {Promise<Result<Boolean, Failure>>}
      */
     async edit() {}
+
+    /**
+     * Task Delete.
+     * @param {Number} _param - .
+     * @returns {Promise<Result<Boolean, Failure>>}
+     */
+    async delete() {}
 }
 
 

@@ -76,6 +76,25 @@ class TaskRepositoryImpl {
             return new Result.Left('error server');
         }
     }
+
+
+    /**
+     * Task Delete.
+     * @param {Number} _param - .
+     * @returns {Promise<Result<Boolean, Failure>>}
+     */
+    async delete(_param) {
+        try {
+            const existingTask = await Task.findByPk(_param);
+            if (!existingTask) {
+                return new Result.Left('Task not found');
+            }
+            await existingTask.destroy();
+            return new Result.Right(true);
+        } catch (error) {
+            return new Result.Left('error server');
+        }
+    }
 }
 
 module.exports = TaskRepositoryImpl;
