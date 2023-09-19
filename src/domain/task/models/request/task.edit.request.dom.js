@@ -1,9 +1,14 @@
-class TaskRequestDom {
-    constructor(title, description, expiration, status) {
+class TaskEditRequestDom {
+    constructor(id, title, description, expiration, status) {
+        this.id = id;
         this.title = title;
         this.description = description;
         this.expiration = expiration;
         this.status = status;
+    }
+
+    getId() {
+        return this.id;
     }
 
     getTitle() {
@@ -23,6 +28,10 @@ class TaskRequestDom {
     }
 
     setTitle(newValue) {
+        this.id = newValue;
+    }
+
+    setTitle(newValue) {
         this.title = newValue;
     }
 
@@ -39,4 +48,4 @@ class TaskRequestDom {
     }
 }
 
-module.exports = TaskRequestDom;
+module.exports = TaskEditRequestDom;

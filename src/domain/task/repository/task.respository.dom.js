@@ -1,7 +1,7 @@
 class TaskRepositoryDom {
     /**
      * Task add.
-     * @param {TaskRequestDom} _param - .
+     * @param {TaskAddRequestDom} _param - .
      * @returns {Promise<Result<Boolean, Failure>>}
      */
     async add(_param) {}
@@ -11,6 +11,13 @@ class TaskRepositoryDom {
      * @returns {Promise<Result<Array<TaskDom>, Failure>>}
      */
     async list() {}
+
+    /**
+     * Task Edit.
+     * @param {TaskEditRequestDom} _param - .
+     * @returns {Promise<Result<Boolean, Failure>>}
+     */
+    async edit() {}
 }
 
 
