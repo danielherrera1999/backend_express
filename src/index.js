@@ -33,6 +33,7 @@ db.sequelize.sync();
 
 // routes
 require('./application/users/routes/user.routes')(app);
+require('./application/tasks/routes/task.routes')(app);
 
 // Simple router example
 app.get("/server-on", (req, res) => {
